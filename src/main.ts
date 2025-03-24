@@ -52,9 +52,25 @@ const CustomTheme = definePreset(Aura, {
           root: {
             background: '{surface.0}',
             color: '{surface.700}',
+            shadow: '0 0px 10px 0 {surface.100}',
           },
           subtitle: {
             color: '{surface.500}',
+          },
+        },
+      },
+    },
+    paginator: {
+      colorScheme: {
+        light: {
+          root: {
+            background: '{surface.0}',
+          },
+          navButton: {
+            color: '{primary.700}',
+            hoverBackground: '{primary.50}',
+            hoverColor: '{primary.700}',
+            selectedBackground: '{primary.100}',
           },
         },
       },
