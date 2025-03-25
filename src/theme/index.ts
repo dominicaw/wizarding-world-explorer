@@ -91,5 +91,41 @@ export const CustomTheme = definePreset(Aura, {
         },
       },
     },
+    autocomplete: {
+      colorScheme: {
+        light: {
+          root: {
+            background: '{surface.0}',
+            color: '{surface.700}',
+            borderColor: '{surface.200}',
+          },
+          option: {
+            color: '{surface.700}',
+            selectedBackground: '{primary.700}',
+            selectedColor: '{primary.0}',
+          },
+          dropdown: {
+            color: '{surface.700}',
+            hoverBackground: '{surface.50}',
+          },
+          overlay: {
+            background: '{surface.0}',
+            borderColor: '{surface.200}',
+          },
+        },
+      },
+    },
+    inputtext: {
+      colorScheme: {
+        light: {
+          root: {
+            background: '{surface.0}',
+            color: '{surface.700}',
+            borderColor: '{surface.200}',
+            hoverBorderColor: '{primary.500}',
+          },
+        },
+      },
+    },
   },
 })

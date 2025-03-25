@@ -35,6 +35,7 @@ const spellTypes = Object.values(SpellType)
     optionValue="value"
     size="large"
     showClear
+    filter
     placeholder="Filter by spell type"
     class="spell-type-filter"
   ></Select>
