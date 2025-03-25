@@ -2,6 +2,7 @@
   --body-bg: var(--p-surface-50);
   --text-primary: var(--p-surface-600);
   --link-color: var(-p-primary-500);
+  color-scheme: light;
 }
 
 #app {
@@ -24,5 +25,11 @@ body {
   body {
     display: flex;
     place-items: center;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light !important;
   }
 }
