@@ -35,9 +35,16 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
 
 <template>
   <div>
-    <section aria-label="Spells container" class="spell-container">
+    <section
+      v-if="paginatedSpells.length > 0"
+      aria-label="Spells container"
+      class="spell-container"
+    >
       <SpellCard v-for="spell in paginatedSpells" :key="spell.id" :spell="spell" />
     </section>
+    <div v-else>
+      <div class="empty-container"><p>😔 No spells found. Try another search.</p></div>
+    </div>
     <Paginator
       class="pagination"
       :rows="pageSize"
@@ -62,5 +69,17 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
 
 .pagination {
   margin-top: 1rem;
+}
+
+.empty-container {
+  p {
+    margin: 0;
+  }
+
+  padding: 1rem;
+  background: var(--p-primary-100);
+  border-radius: 0.25rem;
+  border: 1px solid var(--p-primary-300);
+  color: var(--p-primary-500);
 }
 </style>

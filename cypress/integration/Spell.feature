@@ -27,3 +27,9 @@ Feature: Spells
         Then the spells list should contain the following items
             | name                | tag   | description                                                  |
             | Bewitched Snowballs | Charm | Bewitches snowballs to follow and harass a designated target |
+
+    Scenario: The user sees a message if there are no spells matching their search
+        When the API responds with the full spells list
+        And the user manually navigates to the 'Home' screen
+        Then they type "Test" in the "Search spells by name" input
+        And the "😔 No spells found. Try another search." text should be visible
