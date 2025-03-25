@@ -12,7 +12,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <Card>
+  <Card aria-label="Spell item">
     <template #title>
       {{ spell.name }}
     </template>

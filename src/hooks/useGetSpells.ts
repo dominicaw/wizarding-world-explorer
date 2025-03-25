@@ -7,7 +7,7 @@ export default function useGetSpells(type?: Ref<SpellType | undefined>) {
     queryKey: ['spells', type],
     queryFn: () => getSpells(type?.value),
     staleTime: 1000 * 60 * 5,
-    retry: 3,
+    retry: 1,
     enabled: computed(() => true),
   })
 }

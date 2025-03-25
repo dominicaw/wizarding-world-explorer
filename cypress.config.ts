@@ -33,8 +33,8 @@ export default defineConfig({
     runMode: 2,
     openMode: 0,
   },
-  viewportHeight: 768,
-  viewportWidth: 1024,
+  viewportHeight: 614,
+  viewportWidth: 360,
   defaultCommandTimeout: 6000,
   video: false,
 })
