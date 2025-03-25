@@ -31,6 +31,7 @@ const spellTypes = Object.values(SpellType).map((type) => ({
     :options="spellTypes"
     optionLabel="label"
     optionValue="value"
+    size="large"
     filter
     showClear
     placeholder="Filter by spell type"

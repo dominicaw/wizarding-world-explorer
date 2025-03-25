@@ -1,16 +1,10 @@
 <script setup lang="ts">
-import useGetSpells from '@/hooks/useGetSpells'
 import SpellList from '@/components/SpellList.vue'
 import SpellTypeFilter from '@/components/SpellTypeFilter.vue'
-import { SpellType } from '@/utils/api'
-import { ref, watch } from 'vue'
+import useGetSpells from '@/hooks/useGetSpells'
 import { formatSpellType } from '@/utils'
-import Select from 'primevue/select'
-
-const spellTypes = Object.values(SpellType).map((type) => ({
-  label: formatSpellType(type),
-  value: type,
-}))
+import { SpellType } from '@/utils/api'
+import { ref } from 'vue'
 
 const selectedType = ref<SpellType | undefined>(undefined)
 

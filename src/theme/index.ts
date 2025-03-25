@@ -72,9 +72,6 @@ export const CustomTheme = definePreset(Aura, {
             background: '{surface.0}',
             color: '{surface.700}',
             borderColor: '{surface.200}',
-            filledBackground: '{primary.700}',
-            filledFocusBackground: '{surface.50}',
-            filledHoverBackground: '{primary.700}',
           },
           option: {
             color: '{surface.700}',
