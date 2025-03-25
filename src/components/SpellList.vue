@@ -43,21 +43,24 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
 <template>
   <div>
     <div v-if="isLoading">Loading spells...</div>
-    <div v-else-if="error">Error: {{ error.message }}</div>
+    <div v-else-if="error">Error: {{ error?.message }}</div>
     <div class="spell-container" v-else>
       <SpellCard v-for="spell in paginatedSpells" :key="spell.id" :spell="spell" />
     </div>
-    <Paginator
-      :rows="pageSize"
-      :totalRecords="totalRecords"
-      :first="currentPage * pageSize"
-      @page="onPageChange"
-      :template="{
-        '640px': 'PrevPageLink CurrentPageReport NextPageLink',
-        default: 'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
-      }"
-      currentPageReportTemplate="{first} to {last} of {totalRecords}"
-    />
+    <div v-if="paginatedSpells.length >= pageSize">
+      <Paginator
+        class="pagination"
+        :rows="pageSize"
+        :totalRecords="totalRecords"
+        :first="currentPage * pageSize"
+        @page="onPageChange"
+        :template="{
+          '640px': 'PrevPageLink CurrentPageReport NextPageLink',
+          default: 'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
+        }"
+        currentPageReportTemplate="{first} to {last} of {totalRecords}"
+      />
+    </div>
   </div>
 </template>
 
@@ -66,5 +69,9 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.pagination {
+  margin-top: 1rem;
 }
 </style>

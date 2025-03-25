@@ -67,7 +67,9 @@ const apiClient = axios.create({
   },
 })
 
-export async function getSpells(): Promise<Spell[]> {
-  const response = await apiClient.get('/Spells')
+export async function getSpells(type?: SpellType): Promise<Spell[]> {
+  const response = await apiClient.get('/Spells', {
+    params: type ? { Type: type } : {},
+  })
   return response.data
 }

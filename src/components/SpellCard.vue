@@ -2,6 +2,7 @@
 import { defineProps } from 'vue'
 import Card from 'primevue/card'
 import type { Spell } from '@/utils/api'
+import { formatSpellType } from '@/utils/index'
 
 const props = defineProps<{
   spell: Spell
@@ -14,7 +15,7 @@ const props = defineProps<{
       {{ spell.name }}
     </template>
     <template #content>
-      {{ spell.type }}
+      {{ formatSpellType(spell.type) }}
     </template>
   </Card>
 </template>
