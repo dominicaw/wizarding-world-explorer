@@ -19,10 +19,12 @@ watch(localSelectedType, (newValue) => {
   emits('update:selectedType', newValue)
 })
 
-const spellTypes = Object.values(SpellType).map((type) => ({
-  label: formatSpellType(type),
-  value: type,
-}))
+const spellTypes = Object.values(SpellType)
+  .map((type) => ({
+    label: formatSpellType(type),
+    value: type,
+  }))
+  .sort((a, b) => a.label.localeCompare(b.label))
 </script>
 
 <template>

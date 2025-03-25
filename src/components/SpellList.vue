@@ -31,7 +31,8 @@ function getPaginatedData(data: Spell[], page: number, size: number) {
 
 const paginatedSpells = computed(() => {
   if (!props.spells) return []
-  return getPaginatedData(props.spells, currentPage.value, pageSize.value)
+  const sortedSpells = [...props.spells].sort((a, b) => a.name.localeCompare(b.name)) // Sort alphabetically
+  return getPaginatedData(sortedSpells, currentPage.value, pageSize.value)
 })
 
 const totalRecords = computed(() => props.spells?.length || 0)
@@ -59,20 +60,18 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
     <div class="spell-container" v-else>
       <SpellCard v-for="spell in paginatedSpells" :key="spell.id" :spell="spell" />
     </div>
-    <div v-if="paginatedSpells.length >= pageSize">
-      <Paginator
-        class="pagination"
-        :rows="pageSize"
-        :totalRecords="totalRecords"
-        :first="currentPage * pageSize"
-        @page="onPageChange"
-        :template="{
-          '640px': 'PrevPageLink CurrentPageReport NextPageLink',
-          default: 'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
-        }"
-        currentPageReportTemplate="{first} to {last} of {totalRecords}"
-      />
-    </div>
+    <Paginator
+      class="pagination"
+      :rows="pageSize"
+      :totalRecords="totalRecords"
+      :first="currentPage * pageSize"
+      @page="onPageChange"
+      :template="{
+        '640px': 'PrevPageLink CurrentPageReport NextPageLink',
+        default: 'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
+      }"
+      currentPageReportTemplate="{first} to {last} of {totalRecords}"
+    />
   </div>
 </template>
 
