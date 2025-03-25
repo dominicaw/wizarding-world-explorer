@@ -12,6 +12,7 @@
     }
   ],
   "compilerOptions": {
-    "module": "NodeNext"
+    "module": "ESNext",
+    "types": ["cypress", "@testing-library/cypress"]
   }
 }
