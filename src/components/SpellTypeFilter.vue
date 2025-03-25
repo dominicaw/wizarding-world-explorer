@@ -32,7 +32,6 @@ const spellTypes = Object.values(SpellType).map((type) => ({
     optionLabel="label"
     optionValue="value"
     size="large"
-    filter
     showClear
     placeholder="Filter by spell type"
     class="spell-type-filter"

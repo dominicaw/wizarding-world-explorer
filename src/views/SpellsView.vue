@@ -2,7 +2,6 @@
 import SpellList from '@/components/SpellList.vue'
 import SpellTypeFilter from '@/components/SpellTypeFilter.vue'
 import useGetSpells from '@/hooks/useGetSpells'
-import { formatSpellType } from '@/utils'
 import { SpellType } from '@/utils/api'
 import { ref } from 'vue'
 

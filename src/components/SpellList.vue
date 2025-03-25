@@ -3,6 +3,7 @@ import { ref, computed, type PropType } from 'vue'
 import Paginator from 'primevue/paginator'
 import type { Spell } from '@/utils/api'
 import SpellCard from './SpellCard.vue'
+import Skeleton from 'primevue/skeleton'
 
 const props = defineProps({
   spells: {
@@ -42,8 +43,19 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
 
 <template>
   <div>
-    <div v-if="isLoading">Loading spells...</div>
-    <div v-else-if="error">Error: {{ error?.message }}</div>
+    <div v-if="isLoading">
+      <div>
+        <Skeleton
+          v-for="n in pageSize"
+          :key="n"
+          shape="rectangle"
+          width="100%"
+          height="90px"
+          class="skeleton"
+        />
+      </div>
+    </div>
+    <div v-else-if="error" class="error-message">Error: 😔 {{ error?.message }}</div>
     <div class="spell-container" v-else>
       <SpellCard v-for="spell in paginatedSpells" :key="spell.id" :spell="spell" />
     </div>
@@ -73,5 +85,20 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
 
 .pagination {
   margin-top: 1rem;
+}
+
+.skeleton {
+  margin-bottom: 1rem;
+  background: var(--p-surface-300);
+}
+
+.error-message {
+  color: var(--p-red-500);
+  font-weight: bold;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  background: var(--p-red-100);
+  border: 1px solid var(--p-red-300);
 }
 </style>
