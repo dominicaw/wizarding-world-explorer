@@ -48,6 +48,10 @@ Then('the API throws an error when getting the full spells list', () => {
   cy.interceptSpells(500)
 })
 
+Then('the API responds the filtered spells list', () => {
+  cy.interceptSpellsWithTypeQueryParam(200, 'Charm')
+})
+
 Then('the spells list should contain the following items', (list) => {
   list.hashes().forEach((row, index) => {
     cy.get('section[aria-label="Spells container"]')
@@ -87,4 +91,11 @@ Then('the {string} dropdown should be hidden', (text) => {
 
 Then('they type {string} in the {string} input', (text, input) => {
   cy.get(`input[placeholder="${input}"]`).type(text)
+})
+
+Then('they select {string} in the {string} dropdown', (text, dropdown) => {
+  cy.get(`[role="combobox"][aria-label="${dropdown}"]`).click()
+  cy.findByRole('listbox').within(() => {
+    cy.findByText(text).click()
+  })
 })

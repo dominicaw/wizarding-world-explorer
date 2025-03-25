@@ -33,3 +33,14 @@ Feature: Spells
         And the user manually navigates to the 'Home' screen
         Then they type "Test" in the "Search spells by name" input
         And the "😔 No spells found. Try another search." text should be visible
+
+    Scenario: The user can filter by spell type
+        When the API responds with the full spells list
+        And the user manually navigates to the 'Home' screen
+
+        When the API responds the filtered spells list
+        And they select "Charm" in the "Filter by spell type" dropdown
+        Then the spells list should contain the following items
+            | name                | tag   | description                                                  |
+            | Bewitched Snowballs | Charm | Bewitches snowballs to follow and harass a designated target |
+            | Bluebell Flames     | Charm | Conjures bluebell flames                                     |

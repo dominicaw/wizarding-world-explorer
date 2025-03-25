@@ -74,3 +74,31 @@ Cypress.Commands.add('interceptSpells', (status) => {
     ],
   })
 })
+
+Cypress.Commands.add('interceptSpellsWithTypeQueryParam', (status, queryParam) => {
+  cy.intercept('GET', `/Spells?Type=${queryParam}`, {
+    statusCode: status,
+    body: [
+      {
+        id: '1e64f7ff-b1df-4c82-a192-c54051aaa6aa',
+        name: 'Bewitched Snowballs',
+        incantation: null,
+        effect: 'Bewitches snowballs to follow and harass a designated target',
+        canBeVerbal: null,
+        type: 'Charm',
+        light: 'Transparent',
+        creator: null,
+      },
+      {
+        id: 'abc98f1e-80de-4793-8d8c-df23ad293e65',
+        name: 'Bluebell Flames',
+        incantation: null,
+        effect: 'Conjures bluebell flames',
+        canBeVerbal: true,
+        type: 'Charm',
+        light: 'BrightBlue',
+        creator: null,
+      },
+    ],
+  })
+})

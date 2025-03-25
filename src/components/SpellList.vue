@@ -41,22 +41,23 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
       class="spell-container"
     >
       <SpellCard v-for="spell in paginatedSpells" :key="spell.id" :spell="spell" />
+
+      <Paginator
+        class="pagination"
+        :rows="pageSize"
+        :totalRecords="totalRecords"
+        :first="currentPage * pageSize"
+        @page="onPageChange"
+        :template="{
+          '640px': 'PrevPageLink CurrentPageReport NextPageLink',
+          default: 'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
+        }"
+        currentPageReportTemplate="{first} to {last} of {totalRecords}"
+      />
     </section>
     <div v-else>
       <div class="empty-container"><p>😔 No spells found. Try another search.</p></div>
     </div>
-    <Paginator
-      class="pagination"
-      :rows="pageSize"
-      :totalRecords="totalRecords"
-      :first="currentPage * pageSize"
-      @page="onPageChange"
-      :template="{
-        '640px': 'PrevPageLink CurrentPageReport NextPageLink',
-        default: 'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
-      }"
-      currentPageReportTemplate="{first} to {last} of {totalRecords}"
-    />
   </div>
 </template>
 
