@@ -40,7 +40,9 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
       aria-label="Spells container"
       class="spell-container"
     >
-      <SpellCard v-for="spell in paginatedSpells" :key="spell.id" :spell="spell" />
+      <TransitionGroup appear name="spell-card" tag="div" class="spell-card-container">
+        <SpellCard v-for="spell in paginatedSpells" :key="spell.id" :spell="spell" />
+      </TransitionGroup>
 
       <Paginator
         aria-label="Pagination"
@@ -68,6 +70,12 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
   gap: 1rem;
 }
 
+.spell-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .empty-container {
   p {
     margin: 0;
@@ -78,5 +86,30 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
   border-radius: 0.25rem;
   border: 1px solid var(--p-primary-300);
   color: var(--p-primary-500);
+}
+
+.spell-card-enter-active,
+.spell-card-leave-active {
+  transition: all 0.3s ease;
+}
+
+.spell-card-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.spell-card-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.spell-card-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.spell-card-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
 }
 </style>
