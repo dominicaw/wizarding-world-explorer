@@ -43,6 +43,6 @@ function search(event: { query: string }) {
 
 <style scoped>
 .search-container {
-  margin-bottom: 1rem;
+  width: 100%;
 }
 </style>

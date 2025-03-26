@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import SpellList from '@/components/SpellList.vue'
-import SpellTypeFilter from '@/components/SpellTypeFilter.vue'
+import SpellList from '@/components/Spells/SpellList.vue'
+import SpellTypeFilter from '@/components/Spells/SpellTypeFilter.vue'
 import useGetSpells from '@/hooks/useGetSpells'
 import { SpellType } from '@/utils/api'
-import SpellSearch from '@/components/SpellSearch.vue'
+import SpellSearch from '@/components/Spells/SpellSearch.vue'
 import { computed, ref } from 'vue'
 import Fluid from 'primevue/fluid'
 import Skeleton from 'primevue/skeleton'
@@ -50,8 +50,10 @@ const filteredSpells = computed(() => {
     </div>
 
     <template v-else>
-      <SpellSearch :allSpells="allSpells ?? []" v-model:searchQuery="searchQuery" />
-      <SpellTypeFilter v-model:selectedType="selectedType" />
+      <div class="filters-container">
+        <SpellSearch :allSpells="allSpells ?? []" v-model:searchQuery="searchQuery" />
+        <SpellTypeFilter v-model:selectedType="selectedType" />
+      </div>
       <SpellList :spells="filteredSpells ?? []" />
     </template>
   </Fluid>
@@ -71,5 +73,21 @@ const filteredSpells = computed(() => {
 .skeleton {
   margin-bottom: 1rem;
   background: var(--p-surface-300);
+}
+
+.filters-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--p-surface-0);
+  border-radius: 0.5rem;
+  box-shadow: var(--p-card-shadow);
+  margin-bottom: 1rem;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 }
 </style>

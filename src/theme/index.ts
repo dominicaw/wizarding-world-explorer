@@ -71,6 +71,7 @@ export const CustomTheme = definePreset(Aura, {
           root: {
             background: '{surface.0}',
             color: '{surface.700}',
+            hoverBorderColor: '{primary.500}',
             borderColor: '{surface.200}',
           },
           option: {
@@ -104,12 +105,9 @@ export const CustomTheme = definePreset(Aura, {
             selectedBackground: '{primary.700}',
             selectedColor: '{primary.0}',
           },
-          dropdown: {
-            color: '{surface.700}',
-            hoverBackground: '{surface.50}',
-          },
           overlay: {
             background: '{surface.0}',
+            color: '{surface.700}',
             borderColor: '{surface.200}',
           },
         },
@@ -123,6 +121,31 @@ export const CustomTheme = definePreset(Aura, {
             color: '{surface.700}',
             borderColor: '{surface.200}',
             hoverBorderColor: '{primary.500}',
+          },
+        },
+      },
+    },
+    menubar: {
+      colorScheme: {
+        light: {
+          root: {
+            background: '{primary.100}',
+            color: '{primary.700}',
+            borderColor: '{primary.200}',
+          },
+          item: {
+            color: '{primary.500}',
+            activeBackground: '{primary.100}',
+            activeColor: '{primary.700}',
+          },
+          mobileButton: {
+            color: '{primary.700}',
+            hoverBackground: '{primary.200}',
+            hoverColor: '{primary.700}',
+          },
+          submenu: {
+            background: '{primary.50}',
+            borderColor: '{primary.200}',
           },
         },
       },

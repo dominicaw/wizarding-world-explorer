@@ -43,6 +43,5 @@ const spellTypes = Object.values(SpellType)
 <style scoped>
 .spell-type-filter {
   width: 100%;
-  margin-bottom: 1rem;
 }
 </style>
