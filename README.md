@@ -1,6 +1,6 @@
 # Wizarding World Explorer
 
-This project displays all the spells from the Harry Potter universe and includes filtering, searching and favourting.
+This project displays all the spells from the Harry Potter universe and includes filtering, searching and favouriting.
 
 ## About the project
 
