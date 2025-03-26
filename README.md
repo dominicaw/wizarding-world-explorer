@@ -1,61 +1,60 @@
-# wizarding-world-explorer
+# Wizarding World Explorer
 
-This template should help get you started developing with Vue 3 in Vite.
+This project displays all the spells from the Harry Potter universe and includes filtering, searching and favourting.
 
-## Recommended IDE Setup
+## About the project
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Due to time constraints, I prioritized refining the spell list functionality, ensuring it was polished and user-friendly. Given the relatively straightforward component logic, I determined that unit tests were not essential in this scenario. Instead, I opted for end-to-end tests, which provided broader coverage across various use cases and allowed for effective mocking of API responses.
 
-## Type Support for `.vue` Imports in TS
+## Project Architecture
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+```
+wizarding-world-explorer/
+├── public/
+│   ├── _redirects              # Netlify redirects configuration
+│   ├── favicon.ico
+├── src/
+│   ├── assets/                 # Static assets like CSS and images
+│   ├── components/
+│   │   ├── Common/             # Shared components
+│   │   ├── Spells/             # Components related to spells
+│   ├── hooks/                  # Tanstack hooks
+│   ├── router/                 # Vue Router configuration
+│   ├── theme/                  # Custom PrimeVue theme configuration
+│   ├── utils/                  # Utility functions and API logic
+│   ├── views/                  # Page-level components
+│   ├── App.vue                 # Root Vue component
+│   ├── main.ts                 # Entry point for the Vue app
+├── cypress/
+│   ├── e2e/                    # End-to-end test files
+│   ├── fixtures/               # Mock data for Cypress tests
+│   ├── integration/            # Cucumber feature files for Cypress
+│   ├── support/                # Custom Cypress commands and setup
+│   ├── tsconfig.json           # TypeScript configuration for Cypress
+├── .vscode/
+│   ├── extensions.json         # Recommended VSCode extensions
+│   ├── settings.json           # VSCode workspace settings
+├── .env                        # Environment variables
+├── cypress.config.ts           # Cypress configuration
+├── index.html                  # HTML entry point for the app
+├── package.json                # Project dependencies and scripts
+├── README.md                   # Project documentation
+├── tsconfig.json               # TypeScript configuration
+├── vite.config.ts              # Vite configuration
 ```
 
-### Compile and Hot-Reload for Development
+## View the project
+
+https://wizarding-world-explorer.netlify.app/
+
+## Run the project
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
 ### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
 
 ```sh
-npm run test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
 npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
