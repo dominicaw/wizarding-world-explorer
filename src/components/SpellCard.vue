@@ -14,10 +14,10 @@ const props = defineProps<{
 <template>
   <Card aria-label="Spell item">
     <template #title>
-      {{ spell.name }}
-    </template>
-    <template #content>
-      <div class="card-content-container">
+      <div class="spell-title-container">
+        <div>
+          {{ spell.name }}
+        </div>
         <Tag
           rounded
           class="spell-type-tag"
@@ -29,6 +29,10 @@ const props = defineProps<{
           }"
           >{{ formatSpellType(spell.type) }}</Tag
         >
+      </div>
+    </template>
+    <template #content>
+      <div class="card-content-container">
         <p>{{ spell.effect }}</p>
       </div>
     </template>
@@ -45,7 +49,13 @@ const props = defineProps<{
     margin: 0;
     color: var(--p-neutral-500);
   }
+}
 
+.spell-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 0.5rem;
   .spell-type-tag {
     width: fit-content;
     padding: 0.25rem 0.75rem;

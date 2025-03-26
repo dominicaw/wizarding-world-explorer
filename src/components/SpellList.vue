@@ -43,7 +43,7 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
       <SpellCard v-for="spell in paginatedSpells" :key="spell.id" :spell="spell" />
 
       <Paginator
-        class="pagination"
+        aria-label="Pagination"
         :rows="pageSize"
         :totalRecords="totalRecords"
         :first="currentPage * pageSize"
@@ -66,10 +66,6 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
-
-.pagination {
-  margin-top: 1rem;
 }
 
 .empty-container {
