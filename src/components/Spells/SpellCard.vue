@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
+import { useRouter } from 'vue-router'
 import Card from 'primevue/card'
 import type { Spell } from '@/utils/api'
 import { convertPxToRem, formatSpellType } from '@/utils/index'
@@ -9,10 +10,16 @@ import { getColorFromSpellType } from '@/utils/index'
 const props = defineProps<{
   spell: Spell
 }>()
+
+const router = useRouter()
+
+function navigateToDetails() {
+  router.push(`/spell/${props.spell.id}`)
+}
 </script>
 
 <template>
-  <Card aria-label="Spell item">
+  <Card aria-label="Spell item" @click="navigateToDetails" class="spell-item">
     <template #title>
       <div class="spell-title-container">
         <div>
@@ -40,6 +47,10 @@ const props = defineProps<{
 </template>
 
 <style scoped>
+.spell-item {
+  cursor: pointer;
+}
+
 .card-content-container {
   display: flex;
   flex-direction: column;

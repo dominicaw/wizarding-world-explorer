@@ -1,3 +1,5 @@
+@import 'primeicons/primeicons.css';
+
 :root {
   --body-bg: var(--p-surface-50);
   --text-primary: var(--p-surface-600);

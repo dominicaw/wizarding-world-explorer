@@ -1,4 +1,4 @@
-import { When, Then, Given } from '@badeball/cypress-cucumber-preprocessor'
+import { When, Then } from '@badeball/cypress-cucumber-preprocessor'
 
 function routes() {
   return [
@@ -40,6 +40,10 @@ When('the user manually navigates to the {string} screen', (pageName) => {
   cy.visit(`${getPageRouteFromName(pageName).path}`)
 })
 
+Then('the user should be on the {string} screen', (pageName) => {
+  cy.location('pathname').should('eq', getPageRouteFromName(pageName).path)
+})
+
 Then('the API responds with the full spells list', () => {
   cy.interceptSpells(200)
 })
@@ -52,6 +56,17 @@ Then('the API responds the filtered spells list', () => {
   cy.interceptSpellsWithTypeQueryParam(200, 'Charm')
 })
 
+Then('the API responds with one spell details', () => {
+  cy.interceptSpellById(200)
+})
+
+Then('the API throws an error when getting spell details', () => {
+  cy.interceptSpellById(500)
+})
+
+Then('the API throws an error when getting the filtered spells list', () => {
+  cy.interceptSpellsWithTypeQueryParam(500, 'Charm')
+})
 Then('the spells list should contain the following items', (list) => {
   list.hashes().forEach((row, index) => {
     cy.get('section[aria-label="Spells container"]')
@@ -98,4 +113,17 @@ Then('they select {string} in the {string} dropdown', (text, dropdown) => {
   cy.findByRole('listbox').within(() => {
     cy.findByText(text).click()
   })
+})
+
+When('the {string} button is pressed', (name) => {
+  cy.findByRole('button', { name: name }).click()
+})
+
+When('the {string} card is pressed', (name) => {
+  cy.get('div[aria-label="Spell item"]')
+    .first()
+    .within(() => {
+      cy.findByText(name)
+    })
+    .click()
 })

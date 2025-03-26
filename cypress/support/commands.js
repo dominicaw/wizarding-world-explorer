@@ -102,3 +102,19 @@ Cypress.Commands.add('interceptSpellsWithTypeQueryParam', (status, queryParam) =
     ],
   })
 })
+
+Cypress.Commands.add('interceptSpellById', (status) => {
+  cy.intercept('GET', `/Spells/6306bb66-11a0-4b7d-b046-fb88cd26c57a`, {
+    statusCode: status,
+    body: {
+      id: '6306bb66-11a0-4b7d-b046-fb88cd26c57a',
+      name: 'Bedazzling Hex',
+      incantation: null,
+      effect: 'Disguises things',
+      canBeVerbal: null,
+      type: 'Hex',
+      light: 'None',
+      creator: null,
+    },
+  })
+})

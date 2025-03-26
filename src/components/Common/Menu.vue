@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Menubar from 'primevue/menubar'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const items = ref([
   {
@@ -12,12 +13,18 @@ const items = ref([
     icon: 'pi pi-search',
   },
 ])
+
+const router = useRouter()
+
+function goHome() {
+  router.push('/')
+}
 </script>
 
 <template>
   <Menubar :model="items" class="menu-container">
     <template #start>
-      <div class="logo-container">
+      <div class="logo-container" @click="goHome">
         <div class="logo-img-container">
           <img src="../../assets/crystal-ball.png" />
         </div>
@@ -40,6 +47,7 @@ const items = ref([
 }
 
 .logo-container {
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;

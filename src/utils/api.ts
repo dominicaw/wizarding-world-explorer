@@ -73,3 +73,8 @@ export async function getSpells(type?: SpellType): Promise<Spell[]> {
   })
   return response.data
 }
+
+export async function getSpellById(id: string): Promise<Spell> {
+  const response = await apiClient.get(`/Spells/${id}`)
+  return response.data
+}

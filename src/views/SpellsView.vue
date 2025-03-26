@@ -4,7 +4,7 @@ import SpellTypeFilter from '@/components/Spells/SpellTypeFilter.vue'
 import useGetSpells from '@/hooks/useGetSpells'
 import { SpellType } from '@/utils/api'
 import SpellSearch from '@/components/Spells/SpellSearch.vue'
-import { computed, ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import Fluid from 'primevue/fluid'
 import Skeleton from 'primevue/skeleton'
 
@@ -30,11 +30,19 @@ const filteredSpells = computed(() => {
 
   return result
 })
+
+const friendlyErrorMessage = ref<string | null>(null)
+
+watchEffect(() => {
+  if (error.value) {
+    friendlyErrorMessage.value = '😔 Something went wrong. Please try again.'
+  }
+})
 </script>
 
 <template>
   <Fluid>
-    <div v-if="error" class="error-message">Error: 😔 {{ error?.message }}</div>
+    <div v-if="error" class="error-message">{{ friendlyErrorMessage }}</div>
 
     <div v-else-if="isLoading">
       <div>

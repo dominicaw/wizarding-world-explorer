@@ -15,7 +15,7 @@ Feature: Spells
     Scenario: The user sees an error when attempting to view the full spell list
         When the API throws an error when getting the full spells list
         And the user manually navigates to the 'Home' screen
-        Then the "Error: 😔 Request failed with status code 500" text should be visible
+        Then the "😔 Something went wrong. Please try again." text should be visible
         And the "Search spells by name" input should be hidden
         And the "Filter by spell name" dropdown should be hidden
         And the pagination should be hidden
@@ -44,3 +44,30 @@ Feature: Spells
             | name                | tag   | description                                                  |
             | Bewitched Snowballs | Charm | Bewitches snowballs to follow and harass a designated target |
             | Bluebell Flames     | Charm | Conjures bluebell flames                                     |
+
+    Scenario: The user sees an error when filtering by spell type
+        When the API responds with the full spells list
+        And the user manually navigates to the 'Home' screen
+
+        When the API throws an error when getting the filtered spells list
+        And they select "Charm" in the "Filter by spell type" dropdown
+        Then the "😔 Something went wrong. Please try again." text should be visible
+
+    Scenario: The user can view spell details screen
+        When the API responds with the full spells list
+        And the user manually navigates to the 'Home' screen
+
+        When the API responds with one spell details
+        And the "Bedazzling Hex" card is pressed
+        Then the "Bedazzling Hex" text should be visible
+        And the "Disguises things" text should be visible
+        When the "Back" button is pressed
+        Then the user should be on the "Home" screen
+
+    Scenario: The user sees an error when viewing spell details
+        When the API responds with the full spells list
+        And the user manually navigates to the 'Home' screen
+
+        When the API throws an error when getting spell details
+        And the "Bedazzling Hex" card is pressed
+        Then the "😔 Something went wrong. Please try again." text should be visible
