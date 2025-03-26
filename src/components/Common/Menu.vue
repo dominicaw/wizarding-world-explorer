@@ -3,18 +3,18 @@ import Menubar from 'primevue/menubar'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+const router = useRouter()
+
 const items = ref([
   {
-    label: 'Home',
-    icon: 'pi pi-home',
+    label: 'Spells',
+    command: () => router.push('/'),
   },
   {
-    label: 'Spells',
-    icon: 'pi pi-search',
+    label: 'Favourites',
+    command: () => router.push('/favourites'),
   },
 ])
-
-const router = useRouter()
 
 function goHome() {
   router.push('/')

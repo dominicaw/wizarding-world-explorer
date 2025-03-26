@@ -1,17 +1,36 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Card from 'primevue/card'
 import type { Spell } from '@/utils/api'
 import { convertPxToRem, formatSpellType } from '@/utils/index'
 import Tag from 'primevue/tag'
 import { getColorFromSpellType } from '@/utils/index'
+import Button from 'primevue/button'
 
 const props = defineProps<{
   spell: Spell
 }>()
 
 const router = useRouter()
+
+const isFavourited = ref(false)
+
+isFavourited.value = JSON.parse(localStorage.getItem('favouritedSpells') || '[]').includes(
+  props.spell.id,
+)
+
+function toggleFavorite() {
+  const favouritedSpells = JSON.parse(localStorage.getItem('favouritedSpells') || '[]')
+  if (isFavourited.value) {
+    const index = favouritedSpells.indexOf(props.spell.id)
+    if (index > -1) favouritedSpells.splice(index, 1)
+  } else {
+    favouritedSpells.push(props.spell.id)
+  }
+  localStorage.setItem('favouritedSpells', JSON.stringify(favouritedSpells))
+  isFavourited.value = !isFavourited.value
+}
 
 function navigateToDetails() {
   router.push(`/spell/${props.spell.id}`)
@@ -25,17 +44,27 @@ function navigateToDetails() {
         <div>
           {{ spell.name }}
         </div>
-        <Tag
-          rounded
-          class="spell-type-tag"
-          :style="{
-            backgroundColor: getColorFromSpellType(spell.type),
-            color: 'white',
-            fontSize: convertPxToRem(12),
-            fontWeight: 400,
-          }"
-          >{{ formatSpellType(spell.type) }}</Tag
-        >
+        <div>
+          <Tag
+            rounded
+            class="spell-type-tag"
+            :style="{
+              backgroundColor: getColorFromSpellType(spell.type),
+              color: 'white',
+              fontSize: convertPxToRem(12),
+              fontWeight: 400,
+            }"
+            >{{ formatSpellType(spell.type) }}</Tag
+          >
+          <Button
+            @click.stop="toggleFavorite"
+            :icon="isFavourited ? 'pi pi-heart-fill' : 'pi pi-heart'"
+            variant="text"
+            aria-label="Favourite"
+            rounded
+            class="favorite-button"
+          />
+        </div>
       </div>
     </template>
     <template #content>

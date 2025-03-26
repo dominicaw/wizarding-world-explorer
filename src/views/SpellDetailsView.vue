@@ -29,7 +29,7 @@ function goBack() {
   <div>
     <div v-if="isLoading">
       <div>
-        <Skeleton shape="rectangle" width="15%" height="36px" class="skeleton" />
+        <Skeleton shape="rectangle" width="88px" height="36px" class="skeleton" />
         <Skeleton shape="rectangle" width="100%" height="200px" class="skeleton" />
       </div>
     </div>
