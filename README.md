@@ -26,14 +26,10 @@ wizarding-world-explorer/
 │   ├── App.vue                 # Root Vue component
 │   ├── main.ts                 # Entry point for the Vue app
 ├── cypress/
-│   ├── e2e/                    # End-to-end test files
-│   ├── fixtures/               # Mock data for Cypress tests
+│   ├── fixtures/
 │   ├── integration/            # Cucumber feature files for Cypress
 │   ├── support/                # Custom Cypress commands and setup
 │   ├── tsconfig.json           # TypeScript configuration for Cypress
-├── .vscode/
-│   ├── extensions.json         # Recommended VSCode extensions
-│   ├── settings.json           # VSCode workspace settings
 ├── .env                        # Environment variables
 ├── cypress.config.ts           # Cypress configuration
 ├── index.html                  # HTML entry point for the app
