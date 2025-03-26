@@ -85,14 +85,6 @@ Then('the spells list should contain the following items', (list) => {
   })
 })
 
-Then('the pagination should have the text {string}', (text) => {
-  cy.get('nav[aria-label="Pagination"]').within(() => {
-    cy.get('span.p-paginator-current').first(() => {
-      cy.findByText(text).should('exist')
-    })
-  })
-})
-
 Then('the pagination should be hidden', () => {
   cy.get('nav[aria-label="Pagination"]').should('not.exist')
 })

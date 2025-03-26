@@ -20,10 +20,12 @@ watchEffect(() => {
 
 <template>
   <div>
-    <div class="favourites-header">
-      <h1>Favourites</h1>
-      <p>Peep your favourited spells.</p>
-    </div>
+    <Transition appear name="header" tag="div" class="favourites-header">
+      <div>
+        <h1>Favourites</h1>
+        <p>Peep your favourited spells.</p>
+      </div>
+    </Transition>
 
     <div v-if="isLoading">
       <div>
@@ -46,7 +48,9 @@ watchEffect(() => {
     </div>
 
     <div v-else>
-      <div class="empty-container">🤔 You have no favourited spells yet. Add some!</div>
+      <Transition appear name="empty-state">
+        <div class="empty-container">🤔 You have no favourited spells yet. Add some!</div>
+      </Transition>
     </div>
   </div>
 </template>
@@ -79,5 +83,26 @@ watchEffect(() => {
   border-radius: 0.5rem;
   background-color: var(--p-primary-100);
   color: var(--p-primary-500);
+}
+
+.header-enter-active {
+  transition: all 0.3s ease;
+}
+
+.empty-state-enter-active {
+  transition: all 0.3s ease;
+  transition-delay: 0.1s;
+}
+
+.empty-state-enter-from,
+.header-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.empty-state-enter-to,
+.header-enter-to {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>

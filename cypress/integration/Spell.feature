@@ -10,7 +10,6 @@ Feature: Spells
             | Bedazzling Hex      | Hex   | Disguises things                                             |
             | Bewitched Snowballs | Charm | Bewitches snowballs to follow and harass a designated target |
             | Bluebell Flames     | Charm | Conjures bluebell flames                                     |
-        And the pagination should have the text "1 to 3 of 3"
 
     Scenario: The user sees an error when attempting to view the full spell list
         When the API throws an error when getting the full spells list

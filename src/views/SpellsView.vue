@@ -53,10 +53,18 @@ const filteredSpells = computed(() => {
     </div>
 
     <template v-else>
-      <div class="filters-container">
-        <SpellSearch :allSpells="allSpells ?? []" v-model:searchQuery="searchQuery" />
-        <SpellTypeFilter v-model:selectedType="selectedType" />
-      </div>
+      <Transition appear name="header" tag="div" class="spells-header">
+        <div>
+          <h1>Spells</h1>
+          <p>View all the spells from the Harry Potter universe. ⚡️</p>
+        </div>
+      </Transition>
+      <Transition appear tag="div" name="filter">
+        <div class="filters-container">
+          <SpellSearch :allSpells="allSpells ?? []" v-model:searchQuery="searchQuery" />
+          <SpellTypeFilter v-model:selectedType="selectedType" />
+        </div>
+      </Transition>
       <SpellList :spells="filteredSpells ?? []" />
     </template>
   </Fluid>
@@ -91,6 +99,43 @@ const filteredSpells = computed(() => {
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
+  }
+}
+
+.header-enter-active {
+  transition: all 0.3s ease;
+}
+
+.filter-enter-active {
+  transition: all 0.3s ease;
+  transition-delay: 0.05s;
+}
+
+.filter-enter-from,
+.header-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.filter-enter-to,
+.header-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.spells-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin: 0;
   }
 }
 </style>

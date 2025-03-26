@@ -44,19 +44,24 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
         <SpellCard v-for="spell in paginatedSpells" :key="spell.id" :spell="spell" />
       </TransitionGroup>
 
-      <Paginator
-        aria-label="Pagination"
-        :rows="pageSize"
-        :totalRecords="totalRecords"
-        :first="currentPage * pageSize"
-        @page="onPageChange"
-        :template="{
-          '640px': 'PrevPageLink CurrentPageReport NextPageLink',
-          default: 'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
-        }"
-        currentPageReportTemplate="{first} to {last} of {totalRecords}"
-      />
+      <div v-if="paginatedSpells.length >= pageSize">
+        <Transition tag="div" appear name="pagination">
+          <Paginator
+            aria-label="Pagination"
+            :rows="pageSize"
+            :totalRecords="totalRecords"
+            :first="currentPage * pageSize"
+            @page="onPageChange"
+            :template="{
+              '640px': 'PrevPageLink CurrentPageReport NextPageLink',
+              default: 'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
+            }"
+            currentPageReportTemplate="{first} to {last} of {totalRecords}"
+          />
+        </Transition>
+      </div>
     </section>
+
     <div v-else>
       <div class="empty-container"><p>😔 No spells found. Try another search.</p></div>
     </div>
@@ -88,16 +93,24 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
   color: var(--p-primary-500);
 }
 
-.spell-card-enter-active {
+.pagination-enter-active {
   transition: all 0.3s ease;
+  transition-delay: 0.2s;
 }
 
-.spell-card-enter-from {
+.spell-card-enter-active {
+  transition: all 0.3s ease;
+  transition-delay: 0.1s;
+}
+
+.spell-card-enter-from,
+.pagination-enter-from {
   opacity: 0;
   transform: translateY(20px);
 }
 
-.spell-card-enter-to {
+.spell-card-enter-to,
+.pagination-enter-to {
   opacity: 1;
   transform: translateY(0);
 }
