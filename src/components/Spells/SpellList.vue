@@ -88,8 +88,7 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
   color: var(--p-primary-500);
 }
 
-.spell-card-enter-active,
-.spell-card-leave-active {
+.spell-card-enter-active {
   transition: all 0.3s ease;
 }
 
@@ -101,15 +100,5 @@ function onPageChange(event: { first: number; rows: number; page: number; pageCo
 .spell-card-enter-to {
   opacity: 1;
   transform: translateY(0);
-}
-
-.spell-card-leave-from {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.spell-card-leave-to {
-  opacity: 0;
-  transform: translateY(-20px);
 }
 </style>

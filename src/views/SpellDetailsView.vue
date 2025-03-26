@@ -1,12 +1,10 @@
 <script setup lang="ts">
+import SpellDetails from '@/components/Spells/SpellDetails.vue'
 import useGetSpellById from '@/hooks/useGetSpellById'
-import { formatSpellType, getColorFromSpellType } from '@/utils'
-import Card from 'primevue/card'
-import Skeleton from 'primevue/skeleton'
-import Tag from 'primevue/tag'
-import { useRoute, useRouter } from 'vue-router'
 import Button from 'primevue/button'
+import Skeleton from 'primevue/skeleton'
 import { ref, watchEffect } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
@@ -44,34 +42,9 @@ function goBack() {
     </div>
 
     <div v-else-if="spell">
-      <div class="details-container">
-        <Card>
-          <template #title>
-            <div class="spell-title-container">
-              <div>{{ spell.name }}</div>
-              <Tag
-                rounded
-                class="spell-type-tag"
-                :style="{ backgroundColor: getColorFromSpellType(spell.type), color: 'white' }"
-              >
-                {{ formatSpellType(spell.type) }}
-              </Tag>
-            </div>
-          </template>
-          <template #content>
-            <div class="spell-details-content">
-              <p><strong>Effect:</strong> {{ spell.effect }}</p>
-              <p v-if="spell.incantation"><strong>Incantation:</strong> {{ spell.incantation }}</p>
-              <p v-if="spell.canBeVerbal">
-                <strong>Can Be Verbal:</strong> {{ spell.canBeVerbal ? 'Yes' : 'No' }}
-              </p>
-
-              <p v-if="spell.light"><strong>Light:</strong> {{ spell.light }}</p>
-              <p v-if="spell.creator"><strong>Creator:</strong> {{ spell.creator }}</p>
-            </div>
-          </template>
-        </Card>
-      </div>
+      <Transition appear name="spell-details">
+        <SpellDetails :spell="spell" />
+      </Transition>
     </div>
   </div>
 </template>
@@ -79,32 +52,7 @@ function goBack() {
 <style scoped>
 .back-button {
   margin-bottom: 1rem;
-}
-
-.details-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  button {
-    width: fit-content;
-  }
-}
-
-.spell-title-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.spell-type-tag {
-  padding: 0.25rem 0.75rem;
-  font-size: 0.875rem;
-}
-
-.spell-details-content {
-  margin-top: 1rem;
-  line-height: 1.5;
+  width: fit-content;
 }
 
 .error-message {
@@ -120,5 +68,19 @@ function goBack() {
 .skeleton {
   margin-bottom: 1rem;
   background: var(--p-surface-300);
+}
+
+.spell-details-enter-active {
+  transition: all 0.3s ease;
+}
+
+.spell-details-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.spell-details-enter-to {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
