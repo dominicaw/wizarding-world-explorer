@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import ErrorMessage from '@/components/Common/ErrorMessage.vue'
 import SpellDetails from '@/components/Spells/SpellDetails.vue'
 import useGetSpellById from '@/hooks/useGetSpellById'
 import Button from 'primevue/button'
 import Skeleton from 'primevue/skeleton'
-import { ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
@@ -11,14 +11,6 @@ const router = useRouter()
 const spellId = route.params.id as string
 
 const { data: spell, isLoading, error } = useGetSpellById(spellId)
-
-const friendlyErrorMessage = ref<string | null>(null)
-
-watchEffect(() => {
-  if (error.value) {
-    friendlyErrorMessage.value = '😔 Something went wrong. Please try again.'
-  }
-})
 
 function goBack() {
   router.back()
@@ -37,8 +29,8 @@ function goBack() {
       <Button label="Back" icon="pi pi-arrow-left" @click="goBack" class="back-button" />
     </div>
 
-    <div v-if="error" class="error-message">
-      {{ friendlyErrorMessage }}
+    <div v-if="error">
+      <ErrorMessage />
     </div>
 
     <div v-else-if="spell">
@@ -53,16 +45,6 @@ function goBack() {
 .back-button {
   margin-bottom: 1rem;
   width: fit-content;
-}
-
-.error-message {
-  color: var(--p-red-500);
-  font-weight: bold;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 0.25rem;
-  background: var(--p-red-100);
-  border: 1px solid var(--p-red-300);
 }
 
 .skeleton {

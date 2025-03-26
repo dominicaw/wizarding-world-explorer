@@ -6,6 +6,10 @@ function routes() {
       name: 'Home',
       path: '/',
     },
+    {
+      name: 'Favourites',
+      path: '/favourites',
+    },
   ].map((route) => {
     route.url = `${Cypress.config().baseUrl}${route.path}`
     return route
@@ -67,6 +71,7 @@ Then('the API throws an error when getting spell details', () => {
 Then('the API throws an error when getting the filtered spells list', () => {
   cy.interceptSpellsWithTypeQueryParam(500, 'Charm')
 })
+
 Then('the spells list should contain the following items', (list) => {
   list.hashes().forEach((row, index) => {
     cy.get('section[aria-label="Spells container"]')
@@ -126,4 +131,12 @@ When('the {string} card is pressed', (name) => {
       cy.findByText(name)
     })
     .click()
+})
+
+When('the user presses the favourite button on the {string} card', (name) => {
+  cy.get('div[aria-label="Spell item"]')
+    .filter((_, el) => Cypress.$(el).find('h2').text().trim() === name)
+    .within(() => {
+      cy.findByRole('button', { name: 'Favourite' }).click()
+    })
 })

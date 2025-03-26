@@ -4,6 +4,7 @@ import SpellList from '@/components/Spells/SpellList.vue'
 import useGetSpells from '@/hooks/useGetSpells'
 import type { Spell } from '@/utils/api'
 import Skeleton from 'primevue/skeleton'
+import ErrorMessage from '@/components/Common/ErrorMessage.vue'
 
 const favouritedSpells = ref<Spell[]>([])
 
@@ -37,7 +38,7 @@ watchEffect(() => {
       </div>
     </div>
     <div v-else-if="error">
-      <div class="error-message">😔 Failed to load spells. Please try again.</div>
+      <ErrorMessage />
     </div>
 
     <div v-else-if="favouritedSpells.length > 0">
@@ -78,15 +79,5 @@ watchEffect(() => {
   border-radius: 0.5rem;
   background-color: var(--p-primary-100);
   color: var(--p-primary-500);
-}
-
-.error-message {
-  color: var(--p-red-500);
-  font-weight: bold;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 0.25rem;
-  background: var(--p-red-100);
-  border: 1px solid var(--p-red-300);
 }
 </style>

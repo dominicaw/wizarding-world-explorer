@@ -71,3 +71,24 @@ Feature: Spells
         When the API throws an error when getting spell details
         And the "Bedazzling Hex" card is pressed
         Then the "😔 Something went wrong. Please try again." text should be visible
+
+    Scenario: The user can add a spell to their favourites
+        When the API responds with the full spells list
+        And the user manually navigates to the 'Home' screen
+
+        When the user presses the favourite button on the "Bedazzling Hex" card
+        And the user manually navigates to the 'Favourites' screen
+        Then the spells list should contain the following items
+            | name           | tag | description      |
+            | Bedazzling Hex | Hex | Disguises things |
+
+    Scenario: The user sees a message when they have no favourites
+        When the API responds with the full spells list
+        And the user manually navigates to the 'Favourites' screen
+        Then the "🤔 You have no favourited spells yet. Add some!" text should be visible
+
+    Scenario: The user sees an error on the favourites screen
+        When the API throws an error when getting the full spells list
+
+        And the user manually navigates to the 'Favourites' screen
+        Then the "😔 Something went wrong. Please try again." text should be visible
