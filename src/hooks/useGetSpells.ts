@@ -1,6 +1,6 @@
 import { getSpells, SpellType } from '@/utils/api'
 import { useQuery } from '@tanstack/vue-query'
-import { computed, type Ref } from 'vue'
+import { type Ref } from 'vue'
 
 export default function useGetSpells(type?: Ref<SpellType | undefined>) {
   return useQuery({
@@ -8,6 +8,5 @@ export default function useGetSpells(type?: Ref<SpellType | undefined>) {
     queryFn: () => getSpells(type?.value),
     staleTime: 1000 * 60 * 5,
     retry: 1,
-    enabled: computed(() => true),
   })
 }

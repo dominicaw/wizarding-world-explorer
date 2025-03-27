@@ -4,8 +4,6 @@ import createBundler from '@bahmutov/cypress-esbuild-preprocessor'
 import { createEsbuildPlugin } from '@badeball/cypress-cucumber-preprocessor/esbuild'
 import 'dotenv/config'
 
-console.log('createBundler:', createBundler)
-
 async function setupNodeEvents(
   on: Cypress.PluginEvents,
   config: Cypress.PluginConfigOptions,

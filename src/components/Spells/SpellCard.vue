@@ -3,7 +3,7 @@ import { defineProps, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Card from 'primevue/card'
 import type { Spell } from '@/utils/api'
-import { convertPxToRem, formatSpellType } from '@/utils/index'
+import { formatSpellType } from '@/utils/index'
 import Tag from 'primevue/tag'
 import { getColorFromSpellType } from '@/utils/index'
 import Button from 'primevue/button'
@@ -64,7 +64,7 @@ function navigateToDetails() {
           :style="{
             backgroundColor: getColorFromSpellType(spell.type),
             color: 'white',
-            fontSize: convertPxToRem(12),
+            fontSize: '0.75rem',
             fontWeight: 400,
           }"
           >{{ formatSpellType(spell.type) }}</Tag

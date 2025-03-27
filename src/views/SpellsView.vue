@@ -5,7 +5,7 @@ import useGetSpells from '@/hooks/useGetSpells'
 import { SpellType } from '@/utils/api'
 import ErrorMessage from '@/components/Common/ErrorMessage.vue'
 import SpellSearch from '@/components/Spells/SpellSearch.vue'
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref } from 'vue'
 import Fluid from 'primevue/fluid'
 import Skeleton from 'primevue/skeleton'
 
